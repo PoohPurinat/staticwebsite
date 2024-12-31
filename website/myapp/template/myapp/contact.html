@@ -1,0 +1,66 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}
+
+ติดต่อเรา
+
+{% endblock title %}
+
+{% block content %}
+
+<h1> ช่องทางการติดต่อ </h1>
+
+<br>
+{% if alert == 'success' %}
+    <div class="alert alert-success">
+        <strong>สำเร็จ</strong> ทางเราได้รับข้อมูลแล้ว แอดมินจะรีบดำเนินการแล้วตอบกลับ
+    </div>
+{% endif %}
+<br>
+
+<div class="container">
+    <form method="POST">
+
+        {% csrf_token % %}
+
+        <div class="form-group">
+            <label for="name">ชื่อผู้ติดต่อ</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div><br>
+
+        <div class="form-group">
+            <label for="title">หัวข้อ</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div><br>
+
+        <div class="form-group">
+            <label for="detail">รายละเอียดปัญหา:</label>
+            <textarea class="form-control" rows="5" id="detail" name="detail"></textarea>
+        </div><br>
+
+        <div class="form-group">
+            <label for="email">อีเมลติดต่อกลับ:</label>
+            <input type="text" class="form-control" id="email" name="email">
+            <br>
+        </div>
+
+        <div class="form-group">
+            <label for="phonenumber">เบอร์โทรศัพท์:</label>
+            <input type="text" class="form-control" id="phonenumber" name="phonenumber">
+            <br>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<div class="container">
+{% for staff in namelist %}
+
+    <h4>- {{staff.name}}<br> {{staff.tel}}<br> {{staff.email}} </h4>
+    <hr>
+
+{% endfor %}
+</div>
+
+{% endblock content %}
